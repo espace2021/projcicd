@@ -2,7 +2,7 @@ const express=require("express")
 const dotenv=require("dotenv")
 const mongoose=require("mongoose")
 const cors=require("cors")
-const path = require('path'); // Ajout de l'importation de path
+const path = require('path'); 
 
 const app = express();
 
@@ -23,11 +23,6 @@ const locationRouter =require("./routes/location.route.js");
 
 dotenv.config()
 
-/*
-app.get("/",(req,res)=>{
-    res.send("page accueil")
-})
-*/
 
 // Connexion à la base données
 mongoose.connect(process.env.DATABASECLOUD)
