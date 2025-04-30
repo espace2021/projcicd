@@ -5,6 +5,7 @@ const router=express.Router()
 
 router.post("/",async(req,res)=>{
 const loc1=new Location(req.body)
+console.log(loc1)
 try {
     await loc1.save()
     res.status(200).json(loc1)
