@@ -14,7 +14,7 @@ try {
 }
 })
 
-router.put("/:id",async(req,res)=>{
+router.put("/:id",async(req,res)=>{ console.log(req.body)
     try {
         const art1 = await Article.findByIdAndUpdate(
             req.params.id,
