@@ -1,4 +1,3 @@
-//Model for article
 const mongoose =require("mongoose")
 const articleSchema=mongoose.Schema({
 reference:{ type: String, required: true,unique:true },
