@@ -23,6 +23,7 @@ const locationRouter =require("./routes/location.route.js");
 
 dotenv.config()
 
+//cette route est pour tester l'application mais à enlever avec le build react ajouté
 /*
 app.get("/",(req,res)=>{
     res.send("page accueil")
