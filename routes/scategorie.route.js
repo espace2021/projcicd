@@ -2,11 +2,7 @@ const express=require("express")
 const Scategorie=require("../models/scategorie")
 const router=express.Router()
 
-router.post("/",async(req,res)=>{ console.log(req.body)
-    //console.log(req.body)
-    //console.log("scategorie")
-    //console.log(req.body)
-    //console.log("scategorie")
+router.post("/",async(req,res)=>{ 
 const scat1=new Scategorie(req.body)
 try {
     await scat1.save()
