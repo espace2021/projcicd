@@ -3,7 +3,7 @@ const Article=require("../models/article")
 const router=express.Router()
 
 
-router.post("/",async(req,res)=>{
+router.post("/",async(req,res)=>{ console.log(req.body)
 const art1=new Article(req.body)
 try {
     await art1.save()
