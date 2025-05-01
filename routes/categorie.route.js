@@ -3,7 +3,7 @@ const Categorie=require("../models/categorie")
 const router=express.Router()
 const {auth} = require('../middleware/auth.js');
 
-router.post("/",async(req,res)=>{
+router.post("/",async(req,res)=>{ console.log(req.body);    
 const cat1=new Categorie(req.body)
 try {
     await cat1.save()
