@@ -81,7 +81,7 @@ app.get('/metrics', async (req, res) => {
   res.end(await register.metrics());
 });
 
-//serveur
+//serveur écoute
 app.listen(process.env.PORT)
 console.log("application executée sur le port " + process.env.PORT)
 module.exports = app;
