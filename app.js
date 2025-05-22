@@ -3,7 +3,7 @@ const dotenv=require("dotenv")
 const mongoose=require("mongoose")
 const cors=require("cors")
 const path = require('path'); // Ajout de l'importation de path
-
+const client = require('prom-client');
 const app = express();
 
 app.use(cors({
@@ -49,6 +49,37 @@ app.use('/api/locations', locationRouter);
 //dist reactjs
 app.use(express.static(path.join(__dirname, './client/build'))); // Route pour les pages non trouvées, redirige vers index.html 
 app.get('*', (req, res) => { res.sendFile(path.join(__dirname, './client/build/index.html')); });
+
+// Création d'un registre de métriques
+const register = new client.Registry();
+client.collectDefaultMetrics({ register });
+
+// Exemple de compteur personnalisé
+const httpRequestCounter = new client.Counter({
+  name: 'http_requests_total',
+  help: 'Nombre total de requêtes HTTP',
+  labelNames: ['method', 'route', 'status_code'],
+});
+register.registerMetric(httpRequestCounter);
+
+// Middleware pour compter les requêtes
+app.use((req, res, next) => {
+  res.on('finish', () => {
+    httpRequestCounter.inc({
+      method: req.method,
+      route: req.path,
+      status_code: res.statusCode,
+    });
+  });
+  next();
+});
+
+
+// Route d'exposition des métriques
+app.get('/metrics', async (req, res) => {
+  res.set('Content-Type', register.contentType);
+  res.end(await register.metrics());
+});
 
 //serveur
 app.listen(process.env.PORT)
