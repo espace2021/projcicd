@@ -74,6 +74,9 @@ app.use((req, res, next) => {
   next();
 });
 
+// la route /metrics est utilisée pour exposer les métriques
+// Assurez-vous que le registre est correctement configuré
+// et que les métriques sont collectées avant d'être exposées.
 // Route d'exposition des métriques
 app.get('/metrics', async (req, res) => {
   res.set('Content-Type', register.contentType);
