@@ -39,7 +39,7 @@ pipeline {
                     withSonarQubeEnv('projet') {
                         withCredentials([string(credentialsId: 'sonarqube', variable: 'TOKEN')]) {
                             bat "\"${scannerHome}\\bin\\sonar-scanner.bat\" " +
-                                "-Dsonar.projectKey=node-projetcid " +
+                                "-Dsonar.projectKey=nodejs-projetcid " +
                                 "-Dsonar.sources=. " +
                                 "-Dsonar.login=%TOKEN% " +
                                 "-Dsonar.projectVersion=1.0.0 " +
