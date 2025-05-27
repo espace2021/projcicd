@@ -31,7 +31,6 @@ app.get("/",(req,res)=>{
 */
 
 // Connexion à la base données
-// Pour la base de données locale, utilisez process.env.DATABASE
 mongoose.connect(process.env.DATABASECLOUD)
     .then(() => {console.log("Connexion à la base de données réussie");
    }).catch(err => {

@@ -1,5 +1,4 @@
 const mongoose =require("mongoose")
-//location.js
 const locationSchema=mongoose.Schema({
     name:{ type: String, required: true},
     description:{ type: String, required: true },
