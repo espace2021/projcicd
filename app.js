@@ -10,7 +10,7 @@ app.use(cors({
     origin:'*'
 }))
 
-//middleware
+
 app.use(express.json())
 
 //routes
