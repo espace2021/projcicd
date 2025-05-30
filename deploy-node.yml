@@ -1,0 +1,43 @@
+- name: Déploiement Node.js depuis GitHub
+  hosts: web
+  become: yes
+
+  vars:
+    repo_url: https://github.com/toncompte/mon-app-node.git
+    app_dir: /var/www/mon-app-node
+
+  tasks:
+    - name: Installer Node.js, npm, git
+      apt:
+        name:
+          - nodejs
+          - npm
+          - git
+        update_cache: yes
+        state: present
+
+    - name: Supprimer ancienne version du projet
+      file:
+        path: "{{ app_dir }}"
+        state: absent
+
+    - name: Cloner le dépôt GitHub
+      git:
+        repo: "{{ repo_url }}"
+        dest: "{{ app_dir }}"
+        version: main
+
+    - name: Installer les dépendances npm
+      shell: npm install
+      args:
+        chdir: "{{ app_dir }}"
+
+    - name: Installer pm2 globalement
+      npm:
+        name: pm2
+        global: yes
+
+    - name: Démarrer l'application avec pm2
+      shell: pm2 start app.js --name mon-app || pm2 restart mon-app
+      args:
+        chdir: "{{ app_dir }}"
