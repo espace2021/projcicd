@@ -19,3 +19,16 @@ EXPOSE 3001
 # Lancer l'application
 CMD ["node", "app.js"]
 
+# Pour le conteneur Ansible
+FROM python:3.10-slim
+
+# Installer Ansible et SSH client
+RUN apt-get update && \
+    apt-get install -y openssh-client sshpass && \
+    pip install ansible && \
+    apt-get clean
+
+# Créer un dossier de travail
+WORKDIR /ansible
+
+CMD [ "bash" ]
